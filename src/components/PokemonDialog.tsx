@@ -166,7 +166,6 @@ export default function PokemonDialog({ open, url, onClose }: PokemonDialogProps
                     </Typography>
                   ))}
                 </Stack>
-                {/* You can map data.abilities here */}
               </Box>
             )}
             {tab === 1 && (
