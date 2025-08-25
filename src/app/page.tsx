@@ -76,11 +76,25 @@ export default function Home() {
         backgroundImage: 'linear-gradient(180deg, #fa5656 0%, #fa5656 35%, transparent 90%)',
         backgroundAttachment: 'fixed',
         minHeight: '100dvh',
+        position: 'relative',
+        '::before': {
+          content: '""',
+          position: 'fixed',
+          zIndex: 1,
+          left: 0,
+          top: 0,
+          width: '100vw',
+          height: '100vh',
+          background: 'url(/pokeball.svg) center center no-repeat',
+          backgroundSize: 'contain',
+          opacity: 0.12,
+          pointerEvents: 'none',
+        },
       }}
     >
       <Container maxWidth="md">
         <Typography variant="h1" gutterBottom sx={{ color: 'white', pt: 2 }}>
-          Pokémon List
+          Pokédex
         </Typography>
       </Container>
 
@@ -150,7 +164,7 @@ export default function Home() {
             page.results
               .filter((pokemon: Pokemon) => pokemon.name.toLowerCase().includes(searchValue.toLowerCase()))
               .map((pokemon: Pokemon) => (
-                <Grid key={pokemon.name} size={6}>
+                <Grid key={pokemon.name} size={6} sx={{ zIndex: 2 }}>
                   <div onClick={() => handleCardClick(pokemon.url)} style={{ cursor: 'pointer' }}>
                     <PokemonCard {...pokemon} />
                   </div>
