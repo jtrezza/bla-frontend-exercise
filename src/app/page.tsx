@@ -10,6 +10,7 @@ import {
   TextField,
   InputAdornment,
   IconButton,
+  Button,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -20,8 +21,10 @@ import { PAGE_SIZE } from '@/lib/constants';
 import { Pokemon, PokemonPage } from '@/lib/types';
 import PokemonCard from '@/components/PokemonCard';
 import PokemonDialog from '@/components/PokemonDialog';
+import { withAuthenticationRequired } from '@/components/withAuthenticationRequired';
+import { redirect } from 'next/navigation';
 
-export default function Home() {
+function Home() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [selectedUrl, setSelectedUrl] = useState<string | null>(null);
@@ -92,10 +95,22 @@ export default function Home() {
         },
       }}
     >
-      <Container maxWidth="md">
+      <Container maxWidth="md" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Typography variant="h1" gutterBottom sx={{ color: 'white', pt: 2 }}>
           Pokédex
         </Typography>
+        {/* Logout link */}
+        <Button
+          variant="outlined"
+          color="inherit"
+          onClick={() => {
+            localStorage.removeItem('authenticated');
+            redirect('/login');
+          }}
+          sx={{ border: 'none', color: 'white' }}
+        >
+          Logout
+        </Button>
       </Container>
 
       {showScrollTop && (
@@ -180,3 +195,4 @@ export default function Home() {
     </Box>
   );
 }
+export default withAuthenticationRequired(Home);

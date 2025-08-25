@@ -24,3 +24,8 @@ export type PokemonDetail = {
   stats: { base_stat: number; effort: number; stat: { name: string; url: string } }[];
   types: { slot: number; type: { name: string; url: string } }[];
 };
+
+export type LoginFormData = {
+  username: string;
+  password: string;
+};
